@@ -175,7 +175,7 @@ macro_rules! define_aes_enc(
         $rounds:expr
     ) => (
         impl BlockEncryptor for $name {
-            fn block_size(&self) -> usize { 16 }
+            fn block_size(&self) -> usize { 32 }
             fn encrypt_block(&self, input: &[u8], output: &mut [u8]) {
                 let mut bs = bit_slice_1x16_with_u16(input);
                 bs = encrypt_core(&bs, &self.sk);
@@ -191,7 +191,7 @@ macro_rules! define_aes_dec(
         $rounds:expr
     ) => (
         impl BlockDecryptor for $name {
-            fn block_size(&self) -> usize { 16 }
+            fn block_size(&self) -> usize { 32 }
             fn decrypt_block(&self, input: &[u8], output: &mut [u8]) {
                 let mut bs = bit_slice_1x16_with_u16(input);
                 bs = decrypt_core(&bs, &self.sk);
